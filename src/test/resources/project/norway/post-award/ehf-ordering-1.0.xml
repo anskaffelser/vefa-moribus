@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="urn:fdc:difi.no:2018:vefa:moribus:Profile-1">
+    <Id>9b58335f-eee1-4f92-8446-dcf82e6d0987</Id>
+    <Domain>1b7e9d90-a4f1-4e1d-adad-c9e249a6bfd0</Domain>
+    <Identifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii28:ver2.0</Identifier>
+    <Title>EHF Ordering 1.0 (Profile 28A)</Title>
+
+    <Period>
+        <StartDate>2013-09-25</StartDate>
+    </Period>
+
+    <Role>
+        <Id>90c7e6f5-40f9-4ddb-9e91-1b4abd15855d</Id>
+        <Type>REQUEST</Type>
+        <Dependency>705d8c8d-8ff1-4c21-a444-3e7481595696</Dependency>
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Order-2::Order##urn:www.cenbii.eu:transaction:biitrns001:ver2.0:extended:urn:www.peppol.eu:bis:peppol28a:ver1.0:extended:urn:www.difi.no:ehf:ordre:ver1.0::2.1</Identifier>
+            <Title>Order</Title>
+        </DocumentType>
+    </Role>
+
+    <Role>
+        <Id>17a45a37-7d3a-466f-8fbc-00584045b060</Id>
+        <Type>RESPONSE</Type>
+        <Dependency>b53b5a75-bed3-485f-b82f-22ea93ba3fd4</Dependency>
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2::OrderResponse##urn:www.cenbii.eu:transaction:biitrns076:ver2.0:extended:urn:www.peppol.eu:bis:peppol28a:ver1.0:extended:urn:www.difi.no:ehf:ordrebekreftelse:ver1.0::2.1</Identifier>
+            <Title>Order Response</Title>
+        </DocumentType>
+    </Role>
+
+    <Documentation>
+        <Title>Resources</Title>
+        <Path>https://vefa.difi.no/ehf/standard/ehf-ordering-1.0.current/</Path>
+    </Documentation>
+
+    <Documentation>
+        <Title>Github</Title>
+        <Description>Source for all resources.</Description>
+        <Path>https://github.com/difi/vefa-ehf-postaward</Path>
+    </Documentation>
+</Profile>

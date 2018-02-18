@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--/*  Each token will be replaced by their respective titles in the resulting page. */-->
+    <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Moribus</title>
+
+    <link rel="stylesheet" th:href="${root + 'css/bootstrap.css'}"/>
+    <style>
+        .table { table-layout: fixed; width: 100%; }
+        code, .table > tbody > tr > td { word-wrap: break-word; }
+        dl.dl-horizontal dt { text-align: left; }
+        dl.dl-horizontal dd { margin-bottom: 15pt; }
+        div.list-group { margin-bottom: 0; }
+        ul.list-unstyled li { margin-bottom: 5pt; }
+    </style>
+    <th:block layout:fragment="style"/>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!--/* Brand and toggle get grouped for better mobile display */-->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="${root}">Moribus</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a th:href="${root + 'domain/'}">Domains</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="main" class="container" layout:fragment="content">
+
+</div>
+
+<script th:src="${root + 'js/jquery.js'}"></script>
+<script th:src="${root + 'js/bootstrap.js'}"></script>
+<th:block layout:fragment="script"/>
+
+</body>
+</html>

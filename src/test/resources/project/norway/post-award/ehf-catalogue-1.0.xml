@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="urn:fdc:difi.no:2018:vefa:moribus:Profile-1">
+    <Id>dfba2828-f726-4d7c-8e81-1959054b1dba</Id>
+    <Domain>1b7e9d90-a4f1-4e1d-adad-c9e249a6bfd0</Domain>
+    <Identifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii01:ver2.0</Identifier>
+    <Title>EHF Catalogue 1.0 (Profile 1A)</Title>
+
+    <Period>
+        <StartDate>2013-09-25</StartDate>
+    </Period>
+
+    <Role>
+        <Id>23934d3a-e3a5-4c05-88ff-d8e7e52d0293</Id>
+        <Type>REQUEST</Type>
+        <!-- <Dependency>705d8c8d-8ff1-4c21-a444-3e7481595696</Dependency> -->
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Catalogue-2::Catalogue##urn:www.cenbii.eu:transaction:biitrns019:ver2.0:extended:urn:www.peppol.eu:bis:peppol1a:ver2.0:extended:urn:www.difi.no:ehf:katalog:ver1.0::2.1</Identifier>
+            <Title>Catalogue</Title>
+        </DocumentType>
+    </Role>
+
+    <Role>
+        <Id>a5e8432a-9266-4fd7-97d9-6649930ea9f8</Id>
+        <Type>RESPONSE</Type>
+        <!-- <Dependency>705d8c8d-8ff1-4c21-a444-3e7481595696</Dependency> -->
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2::ApplicationResponse##urn:www.cenbii.eu:transaction:biitrns058:ver2.0:extended:urn:www.difi.no:ehf:katalogbekreftelse:ver1.0::2.1</Identifier>
+            <Title>Catalogue Response</Title>
+        </DocumentType>
+    </Role>
+
+    <!-- <Documentation>
+        <Title>Resources</Title>
+        <Path>https://vefa.difi.no/ehf/standard/ehf-ordering-1.0.current/</Path>
+    </Documentation> -->
+
+    <Documentation>
+        <Title>Github</Title>
+        <Description>Source for all resources.</Description>
+        <Path>https://github.com/difi/vefa-ehf-postaward</Path>
+    </Documentation>
+</Profile>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="urn:fdc:difi.no:2018:vefa:moribus:Profile-1">
+    <Id>216f6b4c-3dde-4258-9852-f30855455f1e</Id>
+    <Domain>ac7c3fa5-ab5c-4ad2-a19d-7505d45ea924</Domain>
+    <Identifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii28:ver2.0</Identifier>
+    <Title>PEPPOL BIS Ordering 2.0 (Profile 28A)</Title>
+
+    <Role>
+        <Id>705d8c8d-8ff1-4c21-a444-3e7481595696</Id>
+        <Type>REQUEST</Type>
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Order-2::Order##urn:www.cenbii.eu:transaction:biitrns001:ver2.0:extended:urn:www.peppol.eu:bis:peppol28a:ver1.0::2.1</Identifier>
+            <Title>Order</Title>
+        </DocumentType>
+    </Role>
+    
+    <Role>
+        <Id>b53b5a75-bed3-485f-b82f-22ea93ba3fd4</Id>
+        <Type>RESPONSE</Type>
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:OrderResponse-2::OrderResponse##urn:www.cenbii.eu:transaction:biitrns076:ver2.0:extended:urn:www.peppol.eu:bis:peppol28a:ver1.0::2.1</Identifier>
+            <Title>Order Response</Title>
+        </DocumentType>
+    </Role>
+
+</Profile>

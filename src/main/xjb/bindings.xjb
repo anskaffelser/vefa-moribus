@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings version="2.1"
+          xmlns="http://java.sun.com/xml/ns/jaxb">
+
+    <bindings schemaLocation="../xsd/Domain-1.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.domain_1"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="../xsd/Lookup-1.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.lookup_1"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="../xsd/Profile-1.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.profile_1"/>
+        </schemaBindings>
+    </bindings>
+
+</bindings>

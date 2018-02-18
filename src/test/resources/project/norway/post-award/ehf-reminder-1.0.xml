@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="urn:fdc:difi.no:2018:vefa:moribus:Profile-1">
+    <Id>a98ee018-6170-47cc-8c90-b457a049e035</Id>
+    <Domain>1b7e9d90-a4f1-4e1d-adad-c9e249a6bfd0</Domain>
+    <Identifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:biixy:ver2.0</Identifier>
+    <Title>EHF Reminder 1.0 (Profile XY)</Title>
+
+    <Period>
+        <StartDate>2013-09-25</StartDate>
+    </Period>
+
+    <Role>
+        <Id>ec41bd7a-d79a-458e-9ce2-ac7a81fd96e0</Id>
+        <Type>REQUEST</Type>
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:Reminder-2::Reminder##urn:www.cenbii.eu:transaction:biicoretrdm017:ver1.0:#urn:www.cenbii.eu:profile:biixy:ver1.0#urn:www.difi.no:ehf:purring:ver1::2.0</Identifier>
+            <Title>Reminder</Title>
+        </DocumentType>
+    </Role>
+
+    <!-- <Documentation>
+        <Title>Resources</Title>
+        <Path>https://vefa.difi.no/ehf/standard/ehf-ordering-1.0.current/</Path>
+    </Documentation> -->
+
+    <Documentation>
+        <Title>Github</Title>
+        <Description>Source for all resources.</Description>
+        <Path>https://github.com/difi/vefa-ehf-postaward</Path>
+    </Documentation>
+</Profile>

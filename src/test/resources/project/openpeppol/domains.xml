@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Domains xmlns="urn:fdc:difi.no:2018:vefa:moribus:Domain-1">
+
+    <Domain>
+        <Id>201a8711-307f-4ac5-ad75-0cf4693572f4</Id>
+        <Qualifier>Pre-Award</Qualifier>
+        <Title>OpenPEPPOL</Title>
+    </Domain>
+
+    <Domain>
+        <Id>ac7c3fa5-ab5c-4ad2-a19d-7505d45ea924</Id>
+        <Qualifier>Post-Award</Qualifier>
+        <Title>OpenPEPPOL</Title>
+    </Domain>
+
+</Domains>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="urn:fdc:difi.no:2018:vefa:moribus:Profile-1">
+    <Id>d2a4a77e-e1bd-49f7-8c7b-dc3892b15541</Id>
+    <Domain>1b7e9d90-a4f1-4e1d-adad-c9e249a6bfd0</Domain>
+    <Identifier scheme="cenbii-procid-ubl">urn:www.cenbii.eu:profile:bii30:ver2.0</Identifier>
+    <Title>EHF Despatch Advise 1.0 (Profile 30)</Title>
+
+    <Period>
+        <StartDate>2013-09-25</StartDate>
+    </Period>
+
+    <Role>
+        <Id>e54358ee-bad2-4b45-a360-da3775c9f3a3</Id>
+        <Type>REQUEST</Type>
+        <!-- <Dependency>705d8c8d-8ff1-4c21-a444-3e7481595696</Dependency> -->
+        <DocumentType>
+            <Identifier scheme="busdox-docid-qns">urn:oasis:names:specification:ubl:schema:xsd:DespatchAdvice-2::DespatchAdvice##urn:www.cenbii.eu:transaction:biitrns016:ver1.0:extended:urn:www.peppol.eu:bis:peppol30a:ver1.0:extended:urn:www.difi.no:ehf:pakkseddel:ver1.0::2.1</Identifier>
+            <Title>Despatch Advice</Title>
+        </DocumentType>
+    </Role>
+
+    <!-- <Documentation>
+        <Title>Resources</Title>
+        <Path>https://vefa.difi.no/ehf/standard/ehf-ordering-1.0.current/</Path>
+    </Documentation> -->
+
+    <Documentation>
+        <Title>Github</Title>
+        <Description>Source for all resources.</Description>
+        <Path>https://github.com/difi/vefa-ehf-postaward</Path>
+    </Documentation>
+</Profile>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Domains xmlns="urn:fdc:difi.no:2018:vefa:moribus:Domain-1">
+
+    <Domain>
+        <Id>1b7e9d90-a4f1-4e1d-adad-c9e249a6bfd0</Id>
+        <Qualifier>Post-Award</Qualifier>
+        <Title>Norway</Title>
+        <Icds>
+            <Icd>9908</Icd>
+        </Icds>
+    </Domain>
+
+    <Domain>
+        <Id>ae64a50f-c7b1-4f2c-a937-b89f8273c5cf</Id>
+        <Qualifier>Payment</Qualifier>
+        <Title>Norway</Title>
+        <Icds>
+            <Icd>9908</Icd>
+        </Icds>
+    </Domain>
+
+</Domains>
