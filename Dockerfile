@@ -4,7 +4,7 @@ ADD . $MAVEN_HOME
 
 RUN cd $MAVEN_HOME \
  && mvn -B clean package \
- && mv $MAVEN_HOME/target/$(ls $MAVEN_HOME/target | grep full$ | head -1)/vefa-moribus /vefa-moribus
+ && mv $MAVEN_HOME/moribus-publisher/target/$(ls $MAVEN_HOME/moribus-publisher/target | grep full$ | head -1)/vefa-moribus /vefa-moribus
 
 
 

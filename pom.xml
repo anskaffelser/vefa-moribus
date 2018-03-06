@@ -4,9 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>no.difi.vefa.moribus</groupId>
-    <artifactId>moribus</artifactId>
+    <groupId>no.difi.vefa</groupId>
+    <artifactId>moribus-parent</artifactId>
+    <packaging>pom</packaging>
     <version>0.8.0-SNAPSHOT</version>
+
+    <modules>
+        <module>moribus-api</module>
+        <module>moribus-publisher</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>
@@ -14,27 +20,6 @@
     </properties>
 
     <dependencies>
-        <!-- Args4J -->
-        <dependency>
-            <groupId>args4j</groupId>
-            <artifactId>args4j</artifactId>
-            <version>2.33</version>
-        </dependency>
-
-        <!-- Saxon -->
-        <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>Saxon-HE</artifactId>
-            <version>9.8.0-7</version>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -50,34 +35,65 @@
             <version>1.7</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Thymeleaf -->
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>3.0.9.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>nz.net.ultraq.thymeleaf</groupId>
-            <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-
-        <!-- Bootstrap -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.3.7-1</version>
-        </dependency>
-
-        <!-- Guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>23.6-jre</version>
-        </dependency>
-
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- VEFA Moribus -->
+            <dependency>
+                <groupId>no.difi.vefa</groupId>
+                <artifactId>moribus-api</artifactId>
+                <version>0.8.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- Args4J -->
+            <dependency>
+                <groupId>args4j</groupId>
+                <artifactId>args4j</artifactId>
+                <version>2.33</version>
+            </dependency>
+
+            <!-- Saxon -->
+            <dependency>
+                <groupId>net.sf.saxon</groupId>
+                <artifactId>Saxon-HE</artifactId>
+                <version>9.8.0-7</version>
+            </dependency>
+
+            <!-- Logging -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+
+            <!-- Thymeleaf -->
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>3.0.9.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>nz.net.ultraq.thymeleaf</groupId>
+                <artifactId>thymeleaf-layout-dialect</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+
+            <!-- Bootstrap -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>3.3.7-1</version>
+            </dependency>
+
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>23.6-jre</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -98,41 +114,6 @@
                 <configuration>
                     <encoding>${java.encoding}</encoding>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.3</version>
-                <executions>
-                    <execution>
-                        <id>xsd</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <schemaDirectory>src/main/xsd</schemaDirectory>
-                            <bindingDirectory>src/main/xjb</bindingDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.6</version>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/assembly-full.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>create-distribution-package</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
