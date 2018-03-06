@@ -1,6 +1,5 @@
 package no.difi.vefa.moribus.processor;
 
-import no.difi.vefa.moribus.Arguments;
 import no.difi.vefa.moribus.api.Processor;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
@@ -12,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.thymeleaf.context.Context;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 /**
@@ -30,40 +31,41 @@ public class SiteProcessor implements Processor {
     @Inject
     private Thymeleaf thymeleaf;
 
+    @Inject
+    @Named("target")
+    private Path targetFolder;
+
     @Override
-    public void process(Structure structure, Arguments arguments) throws IOException {
+    public void process(Structure structure) throws IOException {
         LOGGER.info("Generate site...");
 
-        homepage(structure, arguments);
-        domains(structure, arguments);
-        domain(structure, arguments);
-        profile(structure, arguments);
+        homepage(structure);
+        domains(structure);
+        domain(structure);
+        profile(structure);
     }
 
-    private void homepage(Structure structure, Arguments arguments) throws IOException {
+    private void homepage(Structure structure) throws IOException {
         Context context = new Context();
         context.setVariable("root", "./");
-        context.setVariable("pathgen", pathGenerator);
 
         context.setVariable("domains", structure.getDomains().stream()
                 .collect(Collectors.groupingBy(DomainType::getQualifier)));
-        thymeleaf.publish("home", arguments.getTargetFolder().toPath().resolve("index.html"), context);
+        thymeleaf.publish("home", targetFolder.resolve("index.html"), context);
     }
 
-    private void domains(Structure structure, Arguments arguments) throws IOException {
+    private void domains(Structure structure) throws IOException {
         Context context = new Context();
         context.setVariable("root", "../");
-        context.setVariable("pathgen", pathGenerator);
 
         context.setVariable("domains", structure.getDomains().stream()
                 .collect(Collectors.groupingBy(DomainType::getQualifier)));
-        thymeleaf.publish("domains", arguments.getTargetFolder().toPath().resolve("domain/index.html"), context);
+        thymeleaf.publish("domains", targetFolder.resolve("domain/index.html"), context);
     }
 
-    private void domain(Structure structure, Arguments arguments) throws IOException {
+    private void domain(Structure structure) throws IOException {
         Context context = new Context();
         context.setVariable("root", "../../");
-        context.setVariable("pathgen", pathGenerator);
 
         for (DomainType domain : structure.getDomains()) {
             context.setVariable("domain", domain);
@@ -71,14 +73,13 @@ public class SiteProcessor implements Processor {
                     .filter(p -> domain.getId().equals(p.getDomain()))
                     .collect(Collectors.toList()));
 
-            thymeleaf.publish("domain", arguments.getTargetFolder().toPath().resolve(pathGenerator.getIndex(domain)), context);
+            thymeleaf.publish("domain", targetFolder.resolve(pathGenerator.getIndex(domain)), context);
         }
     }
 
-    private void profile(Structure structure, Arguments arguments) throws IOException {
+    private void profile(Structure structure) throws IOException {
         Context context = new Context();
         context.setVariable("root", "../../../");
-        context.setVariable("pathgen", pathGenerator);
 
         for (ProfileType profile : structure.getProfiles()) {
             DomainType domain = structure.getDomainMap().get(profile.getDomain());
@@ -86,7 +87,7 @@ public class SiteProcessor implements Processor {
             context.setVariable("profile", profile);
             context.setVariable("domain", domain);
 
-            thymeleaf.publish("profile", arguments.getTargetFolder().toPath().resolve(pathGenerator.getIndex(domain, profile)), context);
+            thymeleaf.publish("profile", targetFolder.resolve(pathGenerator.getIndex(domain, profile)), context);
         }
     }
 }

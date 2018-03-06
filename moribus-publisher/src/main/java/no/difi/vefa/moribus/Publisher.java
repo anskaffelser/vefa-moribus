@@ -18,12 +18,10 @@ public class Publisher {
     private Set<Processor> processors;
 
     @Inject
-    private StructureLoader structureLoader;
+    private Structure structure;
 
-    public void perform(Arguments arguments) throws IOException, MoribusException {
-        Structure structure = structureLoader.load(arguments);
-
+    public void perform() throws IOException, MoribusException {
         for (Processor processor : processors)
-            processor.process(structure, arguments);
+            processor.process(structure);
     }
 }

@@ -1,6 +1,5 @@
 package no.difi.vefa.moribus.processor;
 
-import no.difi.vefa.moribus.Arguments;
 import no.difi.vefa.moribus.api.Processor;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.lookup_1.RoleLookupType;
@@ -12,6 +11,8 @@ import no.difi.vefa.moribus.util.JaxbHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -28,11 +29,15 @@ public class RoleLookupProcessor implements Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleLookupProcessor.class);
 
+    @Inject
+    @Named("target")
+    private Path targetFolder;
+
     @Override
-    public void process(Structure structure, Arguments arguments) throws IOException, MoribusException {
+    public void process(Structure structure) throws IOException, MoribusException {
         LOGGER.info("Generate role lookup...");
 
-        Path path = arguments.getTargetFolder().toPath().resolve("api/1.0/role");
+        Path path = targetFolder.resolve("api/1.0/role");
 
         if (!Files.exists(path))
             Files.createDirectories(path);

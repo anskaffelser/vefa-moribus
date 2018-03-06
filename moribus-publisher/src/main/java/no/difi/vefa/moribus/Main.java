@@ -6,6 +6,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import no.difi.vefa.moribus.guice.MoribusModule;
 import no.difi.vefa.moribus.lang.MoribusException;
+import no.difi.vefa.moribus.util.Arguments;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.slf4j.Logger;
@@ -38,11 +39,12 @@ public class Main {
         }
 
         List<Module> modules = Lists.newArrayList(ServiceLoader.load(MoribusModule.class).iterator());
+        modules.add(arguments);
 
         Injector injector = Guice.createInjector(modules);
 
         try {
-            injector.getInstance(Publisher.class).perform(arguments);
+            injector.getInstance(Publisher.class).perform();
         } catch (MoribusException | IOException e) {
             LOGGER.error(e.getMessage(), e);
         }

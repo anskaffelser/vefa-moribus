@@ -1,6 +1,5 @@
 package no.difi.vefa.moribus.util;
 
-import no.difi.vefa.moribus.Arguments;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainsType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
@@ -10,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -33,12 +34,20 @@ public class StructureLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StructureLoader.class);
 
-    public Structure load(Arguments arguments) throws IOException {
-        List<Path> paths = Files.walk(arguments.getSourceFolder().toPath())
+    @Inject
+    @Named("source")
+    private Path sourceFolder;
+
+    @Inject
+    @Named("target")
+    private Path targetFolder;
+
+    public Structure load() throws IOException {
+        List<Path> paths = Files.walk(sourceFolder)
                 .filter(Files::isRegularFile)
                 .filter(p -> p.toString().endsWith(".xml"))
                 .map(Path::toAbsolutePath)
-                .filter(p -> !p.toString().startsWith(arguments.getTargetFolder().toPath().toAbsolutePath().toString()))
+                .filter(p -> !p.toString().startsWith(targetFolder.toAbsolutePath().toString()))
                 .collect(Collectors.toList());
 
         List<Object> objects = new ArrayList<>();
