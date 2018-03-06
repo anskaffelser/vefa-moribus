@@ -6,10 +6,10 @@ import no.difi.vefa.moribus.jaxb.lookup_1.DownloadType;
 import no.difi.vefa.moribus.lang.MoribusException;
 import no.difi.vefa.moribus.model.Structure;
 import no.difi.vefa.moribus.util.JaxbHelper;
-import org.kohsuke.MetaInfServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Singleton;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.nio.file.Path;
 /**
  * @author erlend
  */
-@MetaInfServices
+@Singleton
 public class DownloadProcessor implements Processor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DownloadProcessor.class);

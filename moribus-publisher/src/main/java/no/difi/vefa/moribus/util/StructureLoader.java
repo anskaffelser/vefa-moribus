@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
+import javax.inject.Singleton;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
@@ -27,11 +28,12 @@ import java.util.stream.Collectors;
  *
  * @author erlend
  */
+@Singleton
 public class StructureLoader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StructureLoader.class);
 
-    public static Structure load(Arguments arguments) throws IOException {
+    public Structure load(Arguments arguments) throws IOException {
         List<Path> paths = Files.walk(arguments.getSourceFolder().toPath())
                 .filter(Files::isRegularFile)
                 .filter(p -> p.toString().endsWith(".xml"))
@@ -85,7 +87,7 @@ public class StructureLoader {
      * @return Object parsed from file or null if unexpected content where found.
      * @throws IOException Thrown on problems related to reading file.
      */
-    private static Object parse(Path path) throws IOException {
+    private Object parse(Path path) throws IOException {
         LOGGER.info("Parsing '{}'.", path);
 
         try (InputStream inputStream = Files.newInputStream(path)) {

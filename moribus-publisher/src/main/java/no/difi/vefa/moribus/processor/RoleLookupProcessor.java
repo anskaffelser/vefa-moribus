@@ -9,10 +9,10 @@ import no.difi.vefa.moribus.jaxb.profile_1.RoleType;
 import no.difi.vefa.moribus.lang.MoribusException;
 import no.difi.vefa.moribus.model.Structure;
 import no.difi.vefa.moribus.util.JaxbHelper;
-import org.kohsuke.MetaInfServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Singleton;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
@@ -23,10 +23,10 @@ import java.nio.file.Path;
 /**
  * @author erlend
  */
-@MetaInfServices
-public class RoleLookup implements Processor {
+@Singleton
+public class RoleLookupProcessor implements Processor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoleLookup.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RoleLookupProcessor.class);
 
     @Override
     public void process(Structure structure, Arguments arguments) throws IOException, MoribusException {

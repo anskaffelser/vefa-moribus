@@ -5,8 +5,8 @@ import no.difi.vefa.moribus.Arguments;
 import no.difi.vefa.moribus.api.Processor;
 import no.difi.vefa.moribus.lang.MoribusException;
 import no.difi.vefa.moribus.model.Structure;
-import org.kohsuke.MetaInfServices;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 /**
  * @author erlend
  */
-@MetaInfServices
+@Singleton
 public class ResourceProcessor implements Processor {
 
     @Override

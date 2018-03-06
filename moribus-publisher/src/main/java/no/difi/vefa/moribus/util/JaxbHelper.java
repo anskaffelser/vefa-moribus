@@ -7,6 +7,7 @@ import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfilesType;
 import no.difi.vefa.moribus.lang.MoribusException;
 
+import javax.inject.Singleton;
 import javax.xml.bind.*;
 
 /**
@@ -14,6 +15,7 @@ import javax.xml.bind.*;
  *
  * @author erlend
  */
+@Singleton
 public class JaxbHelper {
 
     private static final JAXBContext JAXB_CONTEXT;

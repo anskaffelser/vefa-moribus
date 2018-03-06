@@ -1,11 +1,13 @@
 package no.difi.vefa.moribus.util;
 
+import com.google.inject.Singleton;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
 
 /**
  * @author erlend
  */
+@Singleton
 public class PathGenerator {
 
     public String get(DomainType domain) {
