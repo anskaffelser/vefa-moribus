@@ -13,7 +13,8 @@
             <xsd:element name="Qualifier" type="xsd:string"/>
             <xsd:element name="Title" type="xsd:string"/>
             <xsd:element name="Description" type="xsd:string" minOccurs="0"/>
-            <xsd:element name="Icds" type="IcdListTypes" minOccurs="0"/>
+            <xsd:element name="Icds" type="ListType" minOccurs="0"/>
+            <xsd:element name="TransportProfile" type="ListType" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -26,6 +27,12 @@
     <xsd:complexType name="IcdListTypes">
         <xsd:sequence>
             <xsd:element name="Icd" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ListType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
 

@@ -3,6 +3,7 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:domain="urn:fdc:difi.no:2018:vefa:moribus:Domain-1"
             xmlns:profile="urn:fdc:difi.no:2018:vefa:moribus:Profile-1"
+            xmlns:transportprofile="urn:fdc:difi.no:2018:vefa:moribus:TransportProfile-1"
             targetNamespace="urn:fdc:difi.no:2018:vefa:moribus:Lookup-1"
             elementFormDefault="qualified" version="1.0">
 
@@ -10,6 +11,8 @@
                 schemaLocation="Domain-1.xsd"/>
     <xsd:import namespace="urn:fdc:difi.no:2018:vefa:moribus:Profile-1"
                 schemaLocation="Profile-1.xsd"/>
+    <xsd:import namespace="urn:fdc:difi.no:2018:vefa:moribus:TransportProfile-1"
+                schemaLocation="TransportProfile-1.xsd"/>
 
     <xsd:element name="DomainLookup" type="DomainLookupType"/>
     <xsd:element name="Download" type="DownloadType"/>
@@ -26,6 +29,7 @@
     <xsd:complexType name="DownloadType">
         <xsd:sequence>
             <xsd:element ref="domain:Domain" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="transportprofile:TransportProfile" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element ref="profile:Profile" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>

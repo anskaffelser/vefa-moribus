@@ -4,6 +4,8 @@ import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainsType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfilesType;
+import no.difi.vefa.moribus.jaxb.transportprofile_1.TransportProfileType;
+import no.difi.vefa.moribus.jaxb.transportprofile_1.TransportProfilesType;
 import no.difi.vefa.moribus.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +77,15 @@ public class StructureLoader {
                     objects.addAll(domains.getDomain());
                 });
 
+        // Extract transport profiles from lists of transport profiles.
+        new ArrayList<>(objects).stream()
+                .filter(TransportProfilesType.class::isInstance)
+                .map(TransportProfilesType.class::cast)
+                .forEach(transportProfiles -> {
+                    objects.remove(transportProfiles);
+                    objects.addAll(transportProfiles.getTransportProfile());
+                });
+
         return new Structure(
                 objects.stream()
                         .filter(DomainType.class::isInstance)
@@ -85,6 +96,11 @@ public class StructureLoader {
                         filter(ProfileType.class::isInstance)
                         .map(ProfileType.class::cast)
                         .sorted(Comparator.comparing(ProfileType::getTitle))
+                        .collect(Collectors.toList()),
+                objects.stream().
+                        filter(TransportProfileType.class::isInstance)
+                        .map(TransportProfileType.class::cast)
+                        .sorted(Comparator.comparing(TransportProfileType::getTitle))
                         .collect(Collectors.toList())
         );
     }
@@ -112,6 +128,10 @@ public class StructureLoader {
                     return unmarshaller.unmarshal(element, ProfilesType.class).getValue();
                 case "Profile":
                     return unmarshaller.unmarshal(element, ProfileType.class).getValue();
+                case "TransportProfiles":
+                    return unmarshaller.unmarshal(element, TransportProfilesType.class).getValue();
+                case "TransportProfile":
+                    return unmarshaller.unmarshal(element, TransportProfileType.class).getValue();
             }
         } catch (JAXBException e) {
             LOGGER.warn(e.getMessage(), e);

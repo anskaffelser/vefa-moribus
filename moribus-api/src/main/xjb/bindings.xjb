@@ -20,4 +20,10 @@
         </schemaBindings>
     </bindings>
 
+    <bindings schemaLocation="../xsd/TransportProfile-1.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.transportprofile_1"/>
+        </schemaBindings>
+    </bindings>
+
 </bindings>

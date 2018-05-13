@@ -5,6 +5,8 @@ import no.difi.vefa.moribus.jaxb.domain_1.DomainsType;
 import no.difi.vefa.moribus.jaxb.lookup_1.*;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfilesType;
+import no.difi.vefa.moribus.jaxb.transportprofile_1.TransportProfileType;
+import no.difi.vefa.moribus.jaxb.transportprofile_1.TransportProfilesType;
 import no.difi.vefa.moribus.lang.MoribusException;
 
 import javax.inject.Singleton;
@@ -26,7 +28,7 @@ public class JaxbHelper {
         try {
             JAXB_CONTEXT = JAXBContext.newInstance(DomainLookupType.class, DownloadType.class,
                     ProfileLookupType.class, RoleLookupType.class, DomainType.class, DomainsType.class,
-                    ProfileType.class, ProfilesType.class);
+                    ProfileType.class, ProfilesType.class, TransportProfileType.class, TransportProfilesType.class);
         } catch (JAXBException e) {
             throw new IllegalStateException(e.getMessage(), e);
         }

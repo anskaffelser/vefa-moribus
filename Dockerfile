@@ -8,7 +8,7 @@ RUN cd $MAVEN_HOME \
 
 
 
-FROM java:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 COPY --from=mvn /vefa-moribus /vefa-moribus
 
