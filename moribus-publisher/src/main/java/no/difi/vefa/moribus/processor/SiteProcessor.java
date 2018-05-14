@@ -3,6 +3,7 @@ package no.difi.vefa.moribus.processor;
 import no.difi.vefa.moribus.api.Processor;
 import no.difi.vefa.moribus.jaxb.domain_1.DomainType;
 import no.difi.vefa.moribus.jaxb.profile_1.ProfileType;
+import no.difi.vefa.moribus.jaxb.transportprofile_1.TransportProfileType;
 import no.difi.vefa.moribus.model.Structure;
 import no.difi.vefa.moribus.util.PathGenerator;
 import no.difi.vefa.moribus.util.Thymeleaf;
@@ -43,6 +44,7 @@ public class SiteProcessor implements Processor {
         domains(structure);
         domain(structure);
         profile(structure);
+        transportProfile(structure);
     }
 
     private void homepage(Structure structure) throws IOException {
@@ -88,6 +90,18 @@ public class SiteProcessor implements Processor {
             context.setVariable("domain", domain);
 
             thymeleaf.publish("profile", targetFolder.resolve(pathGenerator.getIndex(domain, profile)), context);
+        }
+    }
+
+    private void transportProfile(Structure structure) throws IOException {
+        Context context = new Context();
+        context.setVariable("root", "../../");
+
+        for (TransportProfileType tp : structure.getTransportProfiles()) {
+
+            context.setVariable("tp", tp);
+
+            thymeleaf.publish("transport-profile", targetFolder.resolve(String.format("transport-profile/%s/index.html", tp.getId())), context);
         }
     }
 }

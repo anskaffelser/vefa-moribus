@@ -42,6 +42,7 @@ public class DownloadProcessor implements Processor {
         DownloadType downloadType = new DownloadType();
         downloadType.getDomain().addAll(structure.getDomains());
         downloadType.getProfile().addAll(structure.getProfiles());
+        downloadType.getTransportProfile().addAll(structure.getTransportProfiles());
 
         try (OutputStream outputStream = Files.newOutputStream(path)) {
             Marshaller marshaller = JaxbHelper.createMarshaller();
