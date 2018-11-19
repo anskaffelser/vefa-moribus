@@ -2,7 +2,7 @@ package no.difi.vefa.moribus.generator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import lombok.extern.slf4j.Slf4j;
+import no.difi.vefa.moribus.annotation.Step;
 import no.difi.vefa.moribus.annotation.Order;
 import no.difi.vefa.moribus.api.Generator;
 import no.difi.vefa.moribus.jaxb.v2.GroupType;
@@ -23,10 +23,10 @@ import java.util.stream.Collectors;
 /**
  * @author erlend
  */
-@Slf4j
 @Singleton
 @Order(0)
-public class CombinedGenerator implements Generator {
+@Step("combine")
+public class CombineGenerator implements Generator {
 
     private static final JAXBContext JAXB_CONTEXT;
 
@@ -48,7 +48,6 @@ public class CombinedGenerator implements Generator {
 
     @Override
     public void perform() throws IOException, MoribusException {
-        log.info("Combine source files");
         try (OutputStream outputStream = Files.newOutputStream(arguments.getTarget("all.xml"))) {
             saxon.perform("/xslt/combine.xslt", prepareIncludes(), outputStream);
         }

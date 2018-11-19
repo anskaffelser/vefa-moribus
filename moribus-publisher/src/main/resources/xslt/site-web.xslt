@@ -27,7 +27,9 @@
             <xsl:variable name="root" select="'.'"/>
 
             <html lang="en">
-                <xsl:call-template name="head"/>
+                <xsl:call-template name="head">
+                    <xsl:with-param name="root" select="$root"/>
+                </xsl:call-template>
                 <body>
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
@@ -53,7 +55,9 @@
             <xsl:variable name="root" select="'..'"/>
 
             <html lang="en">
-                <xsl:call-template name="head"/>
+                <xsl:call-template name="head">
+                    <xsl:with-param name="root" select="$root"/>
+                </xsl:call-template>
                 <body>
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
@@ -83,7 +87,9 @@
                 <xsl:variable name="domain" select="current()"/>
 
                 <html lang="en">
-                    <xsl:call-template name="head"/>
+                    <xsl:call-template name="head">
+                        <xsl:with-param name="root" select="$root"/>
+                    </xsl:call-template>
                     <body>
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
@@ -135,7 +141,9 @@
 
             <f:File filename="domain/{mb:id($domain/mb:Id)}/{mb:id(mb:Id)}/index.html">
                 <html lang="en">
-                    <xsl:call-template name="head"/>
+                    <xsl:call-template name="head">
+                        <xsl:with-param name="root" select="$root"/>
+                    </xsl:call-template>
                     <body>
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
@@ -219,7 +227,9 @@
 
             <f:File filename="domain/{mb:id($domain/mb:Id)}/{mb:id($subdomain/mb:Id)}/{mb:id(mb:Id)}/index.html">
                 <html lang="en">
-                    <xsl:call-template name="head"/>
+                    <xsl:call-template name="head">
+                        <xsl:with-param name="root" select="$root"/>
+                    </xsl:call-template>
                     <body>
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
@@ -285,7 +295,9 @@
             <xsl:variable name="root" select="'..'"/>
 
             <html lang="en">
-                <xsl:call-template name="head"/>
+                <xsl:call-template name="head">
+                    <xsl:with-param name="root" select="$root"/>
+                </xsl:call-template>
                 <body>
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
@@ -322,7 +334,9 @@
                 <xsl:variable name="root" select="'../..'"/>
 
                 <html lang="en">
-                    <xsl:call-template name="head"/>
+                    <xsl:call-template name="head">
+                        <xsl:with-param name="root" select="$root"/>
+                    </xsl:call-template>
                     <body>
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
@@ -367,7 +381,9 @@
             <xsl:variable name="root" select="'..'"/>
 
             <html lang="en">
-                <xsl:call-template name="head"/>
+                <xsl:call-template name="head">
+                    <xsl:with-param name="root" select="$root"/>
+                </xsl:call-template>
                 <body>
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
@@ -404,7 +420,9 @@
                 <xsl:variable name="root" select="'../..'"/>
 
                 <html lang="en">
-                    <xsl:call-template name="head"/>
+                    <xsl:call-template name="head">
+                        <xsl:with-param name="root" select="$root"/>
+                    </xsl:call-template>
                     <body>
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
@@ -444,11 +462,13 @@
     <!-- Partials -->
 
     <xsl:template name="head">
+        <xsl:param name="root"/>
+
         <head>
             <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+            <link rel="stylesheet" href="{$root}/css/bootstrap.css"/>
 
             <title>Moribus</title>
         </head>

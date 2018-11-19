@@ -1,8 +1,6 @@
 package no.difi.vefa.moribus;
 
 import com.google.common.collect.Lists;
-import com.google.common.io.MoreFiles;
-import com.google.common.io.RecursiveDeleteOption;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Module;
@@ -14,7 +12,6 @@ import no.difi.vefa.moribus.module.ArgumentsModule;
 import no.difi.vefa.moribus.util.Arguments;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
@@ -44,15 +41,12 @@ public class Main {
     }
 
     public void run() throws IOException, MoribusException {
-        log.info("Preparing target");
-        if (Files.exists(arguments.getTarget()))
-            MoreFiles.deleteDirectoryContents(arguments.getTarget(), RecursiveDeleteOption.ALLOW_INSECURE);
-        else
-            Files.createDirectories(arguments.getTarget());
-
         for (Generator generator : generators.stream()
+                .filter(g -> arguments.hasStep(g.getStep()))
                 .sorted(Comparator.comparing(Generator::getOrder))
-                .collect(Collectors.toList()))
+                .collect(Collectors.toList())) {
+            log.info("Generator: {}", generator.getClass().getSimpleName());
             generator.perform();
+        }
     }
 }
