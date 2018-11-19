@@ -3,6 +3,7 @@ package no.difi.vefa.moribus.module;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
 import no.difi.vefa.moribus.util.Arguments;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -10,6 +11,7 @@ import org.kohsuke.args4j.CmdLineParser;
 /**
  * @author erlend
  */
+@Slf4j
 public class ArgumentsModule extends AbstractModule {
 
     private String[] args;
@@ -25,10 +27,10 @@ public class ArgumentsModule extends AbstractModule {
         CmdLineParser parser = new CmdLineParser(arguments);
 
         try {
-            // parse the arguments.
             parser.parseArgument(args);
         } catch (CmdLineException e) {
             parser.printUsage(System.err);
+            log.error("Unable to parse arguments: {}", e.getMessage());
             System.exit(1);
         }
 

@@ -46,8 +46,9 @@ public class Main {
     public void run() throws IOException, MoribusException {
         log.info("Preparing target");
         if (Files.exists(arguments.getTarget()))
-            MoreFiles.deleteRecursively(arguments.getTarget(), RecursiveDeleteOption.ALLOW_INSECURE);
-        Files.createDirectories(arguments.getTarget());
+            MoreFiles.deleteDirectoryContents(arguments.getTarget(), RecursiveDeleteOption.ALLOW_INSECURE);
+        else
+            Files.createDirectories(arguments.getTarget());
 
         for (Generator generator : generators.stream()
                 .sorted(Comparator.comparing(Generator::getOrder))
