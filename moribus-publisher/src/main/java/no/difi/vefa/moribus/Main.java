@@ -1,52 +1,57 @@
 package no.difi.vefa.moribus;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import com.google.inject.Module;
-import no.difi.vefa.moribus.guice.MoribusModule;
+import com.google.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
+import no.difi.vefa.moribus.api.Generator;
 import no.difi.vefa.moribus.lang.MoribusException;
+import no.difi.vefa.moribus.module.ArgumentsModule;
 import no.difi.vefa.moribus.util.Arguments;
-import org.kohsuke.args4j.CmdLineException;
-import org.kohsuke.args4j.CmdLineParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author erlend
  */
+@Slf4j
+@Singleton
 public class Main {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    @Inject
+    private Arguments arguments;
 
-    public static void main(String... args) {
-        Arguments arguments = new Arguments();
+    @Inject
+    private Set<Generator> generators;
 
-        CmdLineParser cmdLineParser = new CmdLineParser(arguments);
-        cmdLineParser.getProperties().withUsageWidth(80);
+    public static void main(String... args) throws IOException, MoribusException {
+        List<Module> modules = Lists.newArrayList(ServiceLoader.load(Module.class));
+        modules.add(new ArgumentsModule(args));
 
-        try {
-            cmdLineParser.parseArgument(args);
-        } catch (CmdLineException e) {
-            System.err.println(e.getMessage());
-            cmdLineParser.printUsage(System.err);
-            System.err.println();
-            return;
-        }
+        Guice.createInjector(modules)
+                .getInstance(Main.class)
+                .run();
+    }
 
-        List<Module> modules = Lists.newArrayList(ServiceLoader.load(MoribusModule.class).iterator());
-        modules.add(arguments);
+    public void run() throws IOException, MoribusException {
+        log.info("Preparing target");
+        if (Files.exists(arguments.getTarget()))
+            MoreFiles.deleteRecursively(arguments.getTarget(), RecursiveDeleteOption.ALLOW_INSECURE);
+        Files.createDirectories(arguments.getTarget());
 
-        Injector injector = Guice.createInjector(modules);
-
-        try {
-            injector.getInstance(Publisher.class).perform();
-        } catch (MoribusException | IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        for (Generator generator : generators.stream()
+                .sorted(Comparator.comparing(Generator::getOrder))
+                .collect(Collectors.toList()))
+            generator.perform();
     }
 }

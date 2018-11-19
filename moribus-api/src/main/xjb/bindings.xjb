@@ -26,4 +26,16 @@
         </schemaBindings>
     </bindings>
 
+    <bindings schemaLocation="../xsd/Moribus-2.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.v2"/>
+        </schemaBindings>
+    </bindings>
+
+    <bindings schemaLocation="../xsd/Files.xsd">
+        <schemaBindings>
+            <package name="no.difi.vefa.moribus.jaxb.v2.files"/>
+        </schemaBindings>
+    </bindings>
+
 </bindings>
