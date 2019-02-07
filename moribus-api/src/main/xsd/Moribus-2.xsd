@@ -62,6 +62,8 @@
 
             <xsd:element name="Title" type="xsd:string"/>
 
+            <xsd:element name="Encryption" type="EncryptionType" minOccurs="0"/>
+
             <xsd:element name="DocumentType" type="DocumentTypeType" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
@@ -71,6 +73,8 @@
             <xsd:element name="Identifier" type="IdentifierType"/>
 
             <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Encrypted" type="xsd:boolean" minOccurs="0"/>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -155,6 +159,12 @@
         </xsd:simpleContent>
     </xsd:complexType>
 
+    <xsd:complexType name="EncryptionType">
+        <xsd:sequence>
+            <xsd:element name="MinimumQuality" type="CertificateQualityType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
     <!-- Group -->
     <xsd:element name="Group" type="GroupType"/>
     <xsd:complexType name="GroupType">
@@ -168,5 +178,11 @@
             <xsd:element name="Include" type="IncludeType"/>
         </xsd:choice>
     </xsd:complexType>
+
+    <xsd:simpleType name="CertificateQualityType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="TBA"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
 </xsd:schema>

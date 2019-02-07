@@ -34,6 +34,7 @@
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
                     </xsl:call-template>
+                    <div class="container-fluid">
                     <div class="row">
                         <xsl:call-template name="sidebar">
                             <xsl:with-param name="root" select="$root"/>
@@ -41,6 +42,7 @@
                         <div id="main" class="col-md-9">
                             <h1>Home</h1>
                         </div>
+                    </div>
                     </div>
                     <xsl:call-template name="footer"/>
                 </body>
@@ -62,6 +64,8 @@
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
                     </xsl:call-template>
+
+                    <div class="container-fluid">
                     <div class="row">
                         <xsl:call-template name="sidebar">
                             <xsl:with-param name="root" select="$root"/>
@@ -75,7 +79,14 @@
                             </nav>
 
                             <h1>Domains</h1>
+
+                            <ul>
+                            <xsl:for-each select="//mb:Domain">
+                                <li><a href="{$root}/domain/{mb:Alias}"><xsl:value-of select="mb:Title"/></a></li>
+                            </xsl:for-each>
+                            </ul>
                         </div>
+                    </div>
                     </div>
                     <xsl:call-template name="footer"/>
                 </body>
@@ -94,6 +105,7 @@
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
                         </xsl:call-template>
+                        <div class="container-fluid">
                         <div class="row">
                             <xsl:call-template name="sidebar">
                                 <xsl:with-param name="root" select="$root"/>
@@ -124,6 +136,7 @@
                                 </xsl:call-template>
                             </div>
                         </div>
+                        </div>
                         <xsl:call-template name="footer"/>
                     </body>
                 </html>
@@ -148,6 +161,7 @@
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
                         </xsl:call-template>
+                        <div class="container-fluid">
                         <div class="row">
                             <xsl:call-template name="sidebar">
                                 <xsl:with-param name="root" select="$root"/>
@@ -198,7 +212,9 @@
                                     <ul>
                                         <xsl:for-each select="mb:IcdId">
                                             <!-- <xsl:sort select="mb:Title"/> -->
-                                            <li><xsl:value-of select="current()"/></li>
+
+                                            <xsl:variable name="icd" select="//mb:Icd[mb:Id = current()]"/>
+                                            <li><a href="{$root}/icd/{$icd/mb:Id}/"><xsl:value-of select="$icd/mb:Id"/> - <xsl:value-of select="$icd/mb:Title"/></a></li>
                                         </xsl:for-each>
                                     </ul>
                                 </xsl:if>
@@ -207,6 +223,7 @@
                                     <xsl:with-param name="root" select="$root"/>
                                 </xsl:call-template>
                             </div>
+                        </div>
                         </div>
                         <xsl:call-template name="footer"/>
                     </body>
@@ -234,6 +251,7 @@
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
                         </xsl:call-template>
+                        <div class="container-fluid">
                         <div class="row">
                             <xsl:call-template name="sidebar">
                                 <xsl:with-param name="root" select="$root"/>
@@ -251,27 +269,42 @@
 
                                 <h1><xsl:value-of select="mb:Title"/></h1>
 
+                                <p class="text-muted"><small><xsl:value-of select="mb:Id"/></small></p>
+
                                 <xsl:if test="mb:Description">
                                     <p class="lead"><xsl:value-of select="mb:Description" /></p>
                                 </xsl:if>
 
-                                <dl class="row">
-                                    <dt class="col-sm-2">Id</dt>
-                                    <dd class="col-sm-10"><xsl:value-of select="mb:Id"/></dd>
-
-                                    <dt class="col-sm-2">Identifier</dt>
-                                    <dd class="col-sm-10"><xsl:value-of select="mb:Identifier"/></dd>
-                                </dl>
+                                <code><small><xsl:value-of select="mb:Identifier/@scheme" /></small><br/><xsl:value-of select="mb:Identifier"/></code>
 
                                 <xsl:for-each select="mb:Role">
-                                    <h2>Role: <xsl:value-of select="mb:Title"/> (<xsl:value-of select="mb:Identifier"/>)</h2>
+                                    <h2><xsl:value-of select="mb:Title"/></h2>
+
+                                    <p class="text-muted"><small><xsl:value-of select="mb:Id"/></small></p>
 
                                     <dl class="row">
-                                        <dt class="col-sm-2">Id</dt>
-                                        <dd class="col-sm-10"><xsl:value-of select="mb:Id"/></dd>
-
                                         <dt class="col-sm-2">Identifier</dt>
                                         <dd class="col-sm-10"><xsl:value-of select="mb:Identifier"/></dd>
+
+                                        <xsl:if test="mb:Encryption">
+                                            <dt class="col-sm-2">Encryption</dt>
+                                            <dd class="col-sm-10">Minimum "<xsl:value-of select="mb:Encryption/mb:MinimumQuality"/>"</dd>
+                                        </xsl:if>
+
+                                        <xsl:if test="mb:DocumentType">
+                                            <dt class="col-sm-2">Document types</dt>
+                                            <dd class="col-sm-10">
+                                                <ul>
+                                                    <xsl:for-each select="mb:DocumentType">
+                                                    <li>
+                                                        <span><xsl:value-of select="mb:Title"/></span><xsl:if test="mb:Encrypted = 'true'"><span class="badge badge-dark float-right">Encrypted</span></xsl:if>
+
+                                                        <code><small><xsl:value-of select="mb:Identifier/@scheme"/></small><br /><xsl:value-of select="mb:Identifier"/></code>
+                                                    </li>
+                                                    </xsl:for-each>
+                                                </ul>
+                                            </dd>
+                                        </xsl:if>
                                     </dl>
                                 </xsl:for-each>
 
@@ -279,6 +312,7 @@
                                     <xsl:with-param name="root" select="$root"/>
                                 </xsl:call-template>
                             </div>
+                        </div>
                         </div>
                         <xsl:call-template name="footer"/>
                     </body>
@@ -302,6 +336,7 @@
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
                     </xsl:call-template>
+                    <div class="container-fluid">
                     <div class="row">
                         <xsl:call-template name="sidebar">
                             <xsl:with-param name="root" select="$root"/>
@@ -325,6 +360,7 @@
                             </ul>
                         </div>
                     </div>
+                    </div>
                     <xsl:call-template name="footer"/>
                 </body>
             </html>
@@ -341,6 +377,7 @@
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
                         </xsl:call-template>
+                        <div class="container-fluid">
                         <div class="row">
                             <xsl:call-template name="sidebar">
                                 <xsl:with-param name="root" select="$root"/>
@@ -366,6 +403,7 @@
                                 </xsl:call-template>
                             </div>
                         </div>
+                        </div>
                         <xsl:call-template name="footer"/>
                     </body>
                 </html>
@@ -388,6 +426,7 @@
                     <xsl:call-template name="header">
                         <xsl:with-param name="root" select="$root"/>
                     </xsl:call-template>
+                    <div class="container-fluid">
                     <div class="row">
                         <xsl:call-template name="sidebar">
                             <xsl:with-param name="root" select="$root"/>
@@ -411,6 +450,7 @@
                             </ul>
                         </div>
                     </div>
+                    </div>
                     <xsl:call-template name="footer"/>
                 </body>
             </html>
@@ -427,6 +467,7 @@
                         <xsl:call-template name="header">
                             <xsl:with-param name="root" select="$root"/>
                         </xsl:call-template>
+                        <div class="container-fluid">
                         <div class="row">
                             <xsl:call-template name="sidebar">
                                 <xsl:with-param name="root" select="$root"/>
@@ -452,6 +493,7 @@
                                 </xsl:call-template>
                             </div>
                         </div>
+                        </div>
                         <xsl:call-template name="footer"/>
                     </body>
                 </html>
@@ -469,6 +511,19 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
             <link rel="stylesheet" href="{$root}/css/bootstrap.css"/>
+            <style>
+                code {
+                    display: block;
+                    margin: 5pt 0;
+                    padding: 5pt;
+                    background-color: #ddd;
+                    color: #333;
+                    word-wrap: break-word;
+                }
+                code small {
+                    font-style: italic;
+                }
+            </style>
 
             <title>Moribus</title>
         </head>
@@ -490,7 +545,7 @@
                 <li class="nav-item">
                     <a href="{$root}/domain/">Domains</a>
 
-                    <ul class="nav flex-column">
+                    <ul class="flex-column">
                         <xsl:for-each select="$domains">
                             <li class="nav-item">
                                 <a href="{$root}/domain/{mb:id(mb:Id)}/"><xsl:value-of select="mb:Title"/></a>

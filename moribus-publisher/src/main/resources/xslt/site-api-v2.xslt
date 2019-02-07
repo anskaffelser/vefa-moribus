@@ -17,6 +17,7 @@
             <xsl:call-template name="service"/>
             <xsl:call-template name="icd"/>
             <xsl:call-template name="tp"/>
+            <xsl:call-template name="encrypted"/>
         </f:Files>
     </xsl:template>
 
@@ -123,6 +124,23 @@
                 <xsl:copy-of select="current()"/>
             </f:File>
         </xsl:for-each>
+    </xsl:template>
+
+    <!-- Encrypted -->
+
+    <xsl:template name="encrypted">
+        <f:File filename="api/v2/encrypted.xml">
+            <Group>
+                <xsl:variable name="processes" select="//mb:Process[mb:Role/mb:Encryption]"/>
+                <xsl:variable name="subdomains" select="for $i in distinct-values($processes/mb:SubDomainId) return //mb:SubDomain[mb:Id = $i]"/>
+                <xsl:variable name="domains" select="for $i in distinct-values($subdomains/mb:DomainId) return //mb:Domain[mb:Id = $i]"/>
+
+                <xsl:copy-of select="$domains"/>
+                <xsl:copy-of select="$subdomains"/>
+                <xsl:copy-of select="$processes"/>
+                <xsl:copy-of select="//mb:Icd"/>
+            </Group>
+        </f:File>
     </xsl:template>
 
 </xsl:stylesheet>
