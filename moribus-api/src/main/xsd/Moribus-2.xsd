@@ -64,7 +64,7 @@
 
             <xsd:element name="Encryption" type="EncryptionType" minOccurs="0"/>
 
-            <xsd:element name="DocumentType" type="DocumentTypeType" maxOccurs="unbounded"/>
+            <xsd:element name="DocumentType" type="DocumentTypeType" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
 
@@ -162,6 +162,7 @@
     <xsd:complexType name="EncryptionType">
         <xsd:sequence>
             <xsd:element name="MinimumQuality" type="CertificateQualityType"/>
+            <!-- MinimumSecurity: LCP, NCP -->
         </xsd:sequence>
     </xsd:complexType>
 
@@ -182,6 +183,8 @@
     <xsd:simpleType name="CertificateQualityType">
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="TBA"/>
+            <xsd:enumeration value="LCP"/>
+            <xsd:enumeration value="NCP"/>
         </xsd:restriction>
     </xsd:simpleType>
 
