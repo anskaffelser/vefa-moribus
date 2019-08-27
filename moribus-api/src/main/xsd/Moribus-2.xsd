@@ -70,7 +70,7 @@
 
     <xsd:complexType name="DocumentTypeType">
         <xsd:sequence>
-            <xsd:element name="Identifier" type="IdentifierType"/>
+            <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
 
             <xsd:element name="Title" type="xsd:string"/>
 

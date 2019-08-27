@@ -299,7 +299,9 @@
                                                     <li>
                                                         <span><xsl:value-of select="mb:Title"/></span><xsl:if test="mb:Encrypted = 'true'"><span class="badge badge-dark float-right">Encrypted</span></xsl:if>
 
-                                                        <code><small><xsl:value-of select="mb:Identifier/@scheme"/></small><br /><xsl:value-of select="mb:Identifier"/></code>
+                                                        <xsl:if test="mb:Identifier">
+                                                            <code><small><xsl:value-of select="mb:Identifier/@scheme"/></small><br /><xsl:value-of select="mb:Identifier"/></code>
+                                                        </xsl:if>
                                                     </li>
                                                     </xsl:for-each>
                                                 </ul>
