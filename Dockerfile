@@ -1,19 +1,11 @@
-FROM maven:3.3.9-jdk-8 AS mvn
+FROM klakegg/saxon:dev-he-graal
 
-ADD . $MAVEN_HOME
+ENV SOURCE="moribus" \
+    TARGET="/target"
 
-RUN cd $MAVEN_HOME \
- && mvn -B clean package \
- && mv $MAVEN_HOME/moribus-publisher/target/$(ls $MAVEN_HOME/moribus-publisher/target | grep full$ | head -1)/vefa-moribus /vefa-moribus
-
-
-
-FROM openjdk:8-jre-alpine
-
-COPY --from=mvn /vefa-moribus /vefa-moribus
+ADD docker /moribus
 
 VOLUME /src /target
 
 WORKDIR /src
-ENTRYPOINT ["sh", "/vefa-moribus/bin/run.sh"]
-CMD ["-target", "/target"]
+ENTRYPOINT ["sh", "/moribus/run.sh"]

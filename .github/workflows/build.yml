@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Validate using XSDs
+      uses: klakegg/xsdchecker@master
+      with:
+        script: |
+           xc --xsd-1.0 **/*.xsd
+           xc --xslt2 **/*.xslt
+
+    - name: Build image
+      run: make
+
+    - name: Upload XSD
+      uses: klakegg/github-upload@v0.9.1
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        file: "xsd/Moribus-2.xsd"
+        label: "Moribus v2 definition"

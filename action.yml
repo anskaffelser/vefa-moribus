@@ -1,0 +1,12 @@
+name: VEFA Moribus
+description: ...
+
+branding:
+  icon: tool
+  color: green
+
+runs:
+  using: docker
+  image: 'docker://anskaffelser/moribus:edge'
+  env:
+    TARGET: target

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:fdc:difi.no:2018:vefa:moribus:v2"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="urn:fdc:difi.no:2018:vefa:moribus:v2"
+            elementFormDefault="qualified" version="1.0">
+
+    <!-- Domain -->
+
+    <xsd:element name="Domain" type="DomainType"/>
+    <xsd:complexType name="DomainType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Sub-domain -->
+
+    <xsd:element name="SubDomain" type="SubDomainType"/>
+    <xsd:complexType name="SubDomainType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+            <xsd:element name="DomainId" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="IcdId" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xsd:element name="Documentation" type="DocumentationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Process -->
+
+    <xsd:element name="Process" type="ProcessType"/>
+    <xsd:complexType name="ProcessType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+            <xsd:element name="SubDomainId" type="xsd:token"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+
+            <xsd:element name="Role" type="ProcessRoleType" maxOccurs="2"/>
+
+            <xsd:element name="Documentation" type="DocumentationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProcessRoleType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+
+            <xsd:element name="Identifier" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Encryption" type="EncryptionType" minOccurs="0"/>
+
+            <xsd:element name="DocumentType" type="DocumentTypeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="DocumentTypeType">
+        <xsd:sequence>
+            <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Encrypted" type="xsd:boolean" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Service -->
+
+    <xsd:element name="Service" type="ServiceType"/>
+    <xsd:complexType name="ServiceType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+            <xsd:element name="SubDomainId" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+
+            <xsd:element name="ProcessIdentifier" type="IdentifierType"/>
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Documentation" type="DocumentationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- ICD -->
+
+    <xsd:element name="Icd" type="IcdType"/>
+    <xsd:complexType name="IcdType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Issuer" type="xsd:string"/>
+
+            <xsd:element name="Documentation" type="DocumentationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Utils -->
+
+    <xsd:complexType name="IdentifierType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:token">
+                <xsd:attribute name="scheme" type="xsd:token"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="DocumentationType">
+        <xsd:sequence>
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Description" type="xsd:string"/>
+            <xsd:element name="Address" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PeriodType">
+        <xsd:sequence>
+            <xsd:element name="StartDate" type="xsd:date" minOccurs="0" />
+            <xsd:element name="EndDate" type="xsd:date" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="IncludeType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:token"/>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="EncryptionType">
+        <xsd:sequence>
+            <xsd:element name="MinimumQuality" type="CertificateQualityType"/>
+            <!-- MinimumSecurity: LCP, NCP -->
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- Group -->
+    <xsd:element name="Group" type="GroupType"/>
+    <xsd:complexType name="GroupType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="Domain"/>
+            <xsd:element ref="SubDomain"/>
+            <xsd:element ref="Process"/>
+            <xsd:element ref="Service"/>
+            <xsd:element ref="Icd"/>
+            <xsd:element name="Include" type="IncludeType"/>
+        </xsd:choice>
+    </xsd:complexType>
+
+    <xsd:simpleType name="CertificateQualityType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="TBA"/>
+            <xsd:enumeration value="LCP"/>
+            <xsd:enumeration value="NCP"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
