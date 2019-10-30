@@ -7,6 +7,6 @@ branding:
 
 runs:
   using: docker
-  image: 'docker://anskaffelser/moribus:0.9.0'
+  image: 'docker://anskaffelser/moribus:edge'
   env:
     TARGET: target
