@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="urn:fdc:anskaffelser.no:2019:vefa:moribus:v3"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="urn:fdc:anskaffelser.no:2019:vefa:moribus:v3"
+            elementFormDefault="qualified"
+            version="1.0">
+
+    <xsd:element name="Domain" type="DomainType"/>
+    <xsd:complexType name="DomainType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="SubDomain" type="SubDomainType"/>
+    <xsd:complexType name="SubDomainType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="DomainRef" type="xsd:token"/>
+            <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
+
+            <xsd:element name="IssuerRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xsd:element name="Role" type="RoleType" maxOccurs="unbounded"/>
+            <xsd:element name="Environment" type="EnvironmentType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="RoleType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="EnvironmentType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Type" type="EnvironmentTypeType"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Process" type="ProcessType"/>
+    <xsd:complexType name="ProcessType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="SubDomainRef" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+
+            <xsd:element name="Type" type="ProcessTypeType"/>
+            <xsd:element name="InitiatorRoleRef" type="xsd:token"/>
+            <xsd:element name="ResponderRoleRef" type="xsd:token"/>
+
+            <xsd:element name="DocumentType" type="DocumentTypeType" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="DocumentTypeType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="ReceiverRoleRef" type="xsd:token"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Service" type="ServiceType"/>
+    <xsd:complexType name="ServiceType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="SubDomainRef" type="xsd:token"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Issuer" type="IssuerType"/>
+    <xsd:complexType name="IssuerType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Issuer" type="xsd:string" minOccurs="0"/>
+
+            <xsd:element name="Scheme" type="xsd:token"/>
+            <xsd:element name="Prefix" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Certificate" type="IssuerType"/>
+    <xsd:complexType name="CertificateType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Issuer" type="xsd:string" minOccurs="0"/>
+
+            <xsd:element name="Identifier" type="IdentifierType"/>
+
+            <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Source" type="SourceType"/>
+    <xsd:complexType name="SourceType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+            <xsd:element name="Project" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:element name="Moribus" type="MoribusType"/>
+    <xsd:complexType name="MoribusType">
+        <xsd:sequence>
+            <xsd:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="SubDomain" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Process" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Service" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Issuer" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Certificate" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Source" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PeriodType">
+        <xsd:sequence>
+            <xsd:element name="EnvironmentRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="StartDate" type="xsd:date" minOccurs="0" />
+            <xsd:element name="EndDate" type="xsd:date" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="IdentifierType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:token">
+                <xsd:attribute name="scheme" type="xsd:token"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="ProcessTypeType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="ONE-WAY"/>
+            <xsd:enumeration value="TWO-WAY"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="EnvironmentTypeType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="TEST"/>
+            <xsd:enumeration value="PRODUCTION"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
