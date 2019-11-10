@@ -287,6 +287,11 @@
                                             <dd class="col-sm-10">Minimum "<span class="value"><xsl:value-of select="mb:Encryption/mb:MinimumQuality"/></span>"</dd>
                                         </xsl:if>
 
+                                        <xsl:if test="mb:Signature">
+                                            <dt class="col-sm-2">Signature</dt>
+                                            <dd class="col-sm-10">Minimum "<span class="value"><xsl:value-of select="mb:Signature/mb:MinimumQuality"/></span>"</dd>
+                                        </xsl:if>
+
                                         <xsl:if test="mb:DocumentType">
                                             <dt class="col-sm-2">Document types</dt>
                                             <dd class="col-sm-10">
@@ -296,6 +301,9 @@
                                                         <span class="value"><xsl:value-of select="mb:Title"/></span>
                                                         <xsl:if test="mb:Encrypted = 'true'">
                                                             <span class="badge badge-dark float-right">Encrypted</span>
+                                                          </xsl:if>
+                                                        <xsl:if test="mb:Signed = 'true'">
+                                                            <span class="badge badge-dark float-right">Signed</span>
                                                           </xsl:if>
 
                                                         <xsl:if test="mb:Identifier">

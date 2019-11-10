@@ -112,7 +112,7 @@
     <xsl:template name="encrypted">
         <xsl:result-document href="api/v2/encrypted.xml">
             <Group>
-                <xsl:variable name="processes" select="//mb:Process[mb:Role/mb:Encryption]"/>
+                <xsl:variable name="processes" select="//mb:Process[mb:Role/mb:Encryption | mb:Role/mb:Signature]"/>
                 <xsl:variable name="subdomains" select="for $i in distinct-values($processes/mb:SubDomainId) return //mb:SubDomain[mb:Id = $i]"/>
                 <xsl:variable name="domains" select="for $i in distinct-values($subdomains/mb:DomainId) return //mb:Domain[mb:Id = $i]"/>
 
