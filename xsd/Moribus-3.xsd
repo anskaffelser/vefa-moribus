@@ -9,7 +9,7 @@
     <xsd:complexType name="DomainType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Title" type="xsd:string"/>
 
@@ -22,7 +22,7 @@
     <xsd:complexType name="SubDomainType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="DomainRef" type="xsd:token"/>
             <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
 
@@ -30,6 +30,8 @@
 
             <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
 
+            <xsd:element name="ProductRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="CertificateRef" type="CertificateRefType" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="IssuerRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Role" type="RoleType" maxOccurs="unbounded"/>
@@ -41,7 +43,7 @@
     <xsd:complexType name="RoleType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Title" type="xsd:string"/>
         </xsd:sequence>
@@ -51,7 +53,7 @@
     <xsd:complexType name="EnvironmentType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Title" type="xsd:string"/>
 
@@ -68,7 +70,7 @@
     <xsd:complexType name="ProcessType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="SubDomainRef" type="xsd:token"/>
 
             <xsd:element name="Title" type="xsd:string"/>
@@ -76,6 +78,8 @@
             <xsd:element name="Identifier" type="IdentifierType"/>
 
             <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+
+            <xsd:element name="ProductRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Type" type="ProcessTypeType"/>
             <xsd:element name="InitiatorRoleRef" type="xsd:token"/>
@@ -94,7 +98,11 @@
 
             <xsd:element name="ReceiverRoleRef" type="xsd:token"/>
 
-            <xsd:element name="Identifier" type="IdentifierType"/>
+            <xsd:element name="Identifier" type="IdentifierType" minOccurs="0"/>
+
+            <xsd:element name="CertificateUsage" type="CertificateUsageType" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xsd:element name="ProductRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="draft" type="xsd:boolean"/>
     </xsd:complexType>
@@ -103,7 +111,7 @@
     <xsd:complexType name="ServiceType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="SubDomainRef" type="xsd:token"/>
 
             <xsd:element name="Title" type="xsd:string"/>
@@ -111,6 +119,9 @@
             <xsd:element name="Identifier" type="IdentifierType"/>
 
             <xsd:element name="Period" type="PeriodType" minOccurs="0"/>
+            <xsd:element name="CertificateUsage" type="CertificateUsageType" minOccurs="0" maxOccurs="unbounded"/>
+
+            <xsd:element name="ProductRef" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
         <xsd:attribute name="draft" type="xsd:boolean"/>
     </xsd:complexType>
@@ -119,7 +130,7 @@
     <xsd:complexType name="IssuerType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
 
             <xsd:element name="Title" type="xsd:string"/>
@@ -133,11 +144,11 @@
         <xsd:attribute name="draft" type="xsd:boolean"/>
     </xsd:complexType>
 
-    <xsd:element name="Certificate" type="IssuerType"/>
+    <xsd:element name="Certificate" type="CertificateType"/>
     <xsd:complexType name="CertificateType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
 
             <xsd:element name="Title" type="xsd:string"/>
@@ -150,11 +161,23 @@
         <xsd:attribute name="draft" type="xsd:boolean"/>
     </xsd:complexType>
 
+    <xsd:element name="Product" type="ProductType"/>
+    <xsd:complexType name="ProductType">
+        <xsd:sequence>
+            <xsd:element name="Id" type="xsd:string"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="SourceRef" type="xsd:token" minOccurs="0"/>
+
+            <xsd:element name="Title" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="draft" type="xsd:boolean"/>
+    </xsd:complexType>
+
     <xsd:element name="Source" type="SourceType"/>
     <xsd:complexType name="SourceType">
         <xsd:sequence>
             <xsd:element name="Id" type="xsd:string"/>
-            <xsd:element name="Alias" type="xsd:token" minOccurs="0"/>
+            <xsd:element name="Alias" type="xsd:token" minOccurs="0" maxOccurs="unbounded"/>
 
             <xsd:element name="Title" type="xsd:string"/>
             <xsd:element name="Project" type="xsd:string" minOccurs="0"/>
@@ -171,6 +194,7 @@
             <xsd:element ref="Service" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element ref="Issuer" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element ref="Certificate" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element ref="Product" minOccurs="0" maxOccurs="unbounded"/>
             <xsd:element ref="Source" minOccurs="0" maxOccurs="unbounded"/>
         </xsd:sequence>
     </xsd:complexType>
@@ -192,6 +216,14 @@
         </xsd:simpleContent>
     </xsd:complexType>
 
+    <xsd:complexType name="CertificateRefType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:token">
+                <xsd:attribute name="usage" type="CertificateUsageType" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
     <xsd:simpleType name="ProcessTypeType">
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="ONE-WAY"/>
@@ -203,6 +235,13 @@
         <xsd:restriction base="xsd:token">
             <xsd:enumeration value="TEST"/>
             <xsd:enumeration value="PRODUCTION"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="CertificateUsageType">
+        <xsd:restriction base="xsd:token">
+            <xsd:enumeration value="ENCRYPTION"/>
+            <xsd:enumeration value="SIGNING"/>
         </xsd:restriction>
     </xsd:simpleType>
 
